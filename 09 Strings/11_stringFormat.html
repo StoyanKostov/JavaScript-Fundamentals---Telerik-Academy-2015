@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 11. String format</title>
+</head>
+<body>
+	<h1>Problem 11. String format</h1>
+	<ul>
+		<li>Write a function that formats a string using placeholders.</li>
+		<li>The function should work with up to 30 placeholders and all types.</li>
+	</ul>
+	<div>
+		<i>Example:</i>
+		<pre>
+			<code>
+				var frmt = '{0}, {1}, {0} text {2}';
+				var str = stringFormat(frmt, 1, 'Pesho', 'Gosho');
+				//str = '1, Pesho, 1 text Gosho'
+			</code>
+		</pre>
+	</div>
+	<script>
+		// Test input
+		var frmt = '{0}, dsfgdsfg {1}, dfgdfgdfg {0} text {2}'; // /({.*?})/g
+
+		// Main logic
+		function stringFormat(placeHolderTemplate){
+			var	substitutedText = '',
+				currStartPlaceHolderIndex = -1,
+				currEndPlaceHolderIndex = -1,
+				placeHoldersValueArray = Array.prototype.slice.call(arguments, 1);
+
+				//If no placeholders
+				if (placeHolderTemplate.indexOf('{') === -1) {
+					throw new Error('String must contain place holder in format {0}, {1} ect');
+				}
+				
+				//If PlaceHolders and PlaceHolderValues not same number
+				var allPlaceHolderNumber = Array.prototype.filter.call(placeHolderTemplate, function(element){
+					return element === '{';
+				}).length;
+
+				if (allPlaceHolderNumber !== placeHoldersValueArray.length) {
+					throw new Error('PlaceHolders and PlaceHolderValues should be same number');
+				}
+
+				while(true){
+					currStartPlaceHolderIndex = placeHolderTemplate.indexOf('{', currStartPlaceHolderIndex + 1);
+
+					if (currStartPlaceHolderIndex === -1) {
+						substitutedText += placeHolderTemplate.substring(currEndPlaceHolderIndex + 1);
+						break;
+					}
+					else{
+						substitutedText += placeHolderTemplate.substring(currEndPlaceHolderIndex + 1, currStartPlaceHolderIndex);
+						substitutedText += placeHoldersValueArray.shift();
+					}
+					
+					currEndPlaceHolderIndex = placeHolderTemplate.indexOf('}', currStartPlaceHolderIndex);
+
+				}
+
+			return substitutedText;
+ 		}
+
+		// Output
+		console.log(stringFormat(frmt, 1, 'Pesho', 'Gosho', 'Gosho1'));
+	</script>
+</body>
+</html>

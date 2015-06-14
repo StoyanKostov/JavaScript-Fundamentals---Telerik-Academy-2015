@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6. Point in Circle</title>
+</head>
+<body>
+	<h1>Problem 6. Point in Circle</h1>
+	<p>Write an expression that checks if given point P(x, y) is within a circle K({0,0}, 5). //{0,0} is the centre and 5 is the radius</p>
+	<label>X:</label><input type="text" name="x" id="xPoint" value="" />
+	<label>Y:</label><input type="text" name="y" id="yPoint" value="" />
+	<input type="text" name="result" id="result" disabled="disabled" value="" />
+	<button onclick="isInCircle()">check</button>
+	<script>
+		var xPoint = document.getElementById("xPoint"),
+			yPoint = document.getElementById("yPoint"),
+			result = document.getElementById("result");
+		
+		function isInCircle() {
+			result.value = xPoint.value*xPoint.value + yPoint.value*yPoint.value <= 25;
+		}
+	</script>
+</body>
+</html>
+

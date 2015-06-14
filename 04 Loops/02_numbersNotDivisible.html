@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 2. Numbers not divisible</title>
+</head>
+<body>
+	<h1>Problem 2. Numbers not divisible</h1>
+	<p>Write a script that prints all the numbers from 1 to N, that are not divisible by 3 and 7 at the same time</p>
+    <label>number:</label><input type="text" name="number" id="number" value="" />
+    <button onclick="numbersRange()">check</button>
+	<label>Result: </label><textarea cols="50" id="result"></textarea>
+	<script>
+		var result = document.getElementById("result"),
+			number = document.getElementById("number");
+
+		function numbersRange(){
+			var numberValue = number.value*1,
+				numbersArray = [],
+				i = 1;
+
+			while (i <= numberValue) {
+				if (i % 3 !== 0 && i % 7 !== 0) {
+					numbersArray.push(i);
+				};
+				i++;
+			}
+
+			if (numbersArray.length > 0) {
+				result.value = numbersArray.join(', ');
+			}
+			else{
+				result.value = 'No such numbers';
+			};
+		}
+	</script>
+</body>
+</html>

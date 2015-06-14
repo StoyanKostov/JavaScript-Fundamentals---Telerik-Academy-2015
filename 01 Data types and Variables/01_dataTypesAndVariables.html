@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Types And Variables</title>
+</head>
+<body>
+    <h1>Data Types And Variables</h1>
+    <script>
+        /*Problem 1. JavaScript literals*/
+        function Person(firstName, lastName){
+            var self = this;
+            self.firstName = firstName;
+            self.lastName = lastName;
+            self.yelt = function(){
+                console.log('My name is ' + self.firstName + ' ' + self.lastName);
+            }
+        };
+
+        Person.prototype.yelt = function() {
+            var self = this;
+            console.log('My name is ' + self.firstName + ' ' + self.lastName);
+        };
+
+        var myInt = 12,
+            myFloat = 3.5,
+            myBoolean = true,
+            myJson = {foo: 'bar'},
+            myArray = ['foo', 'bar'],
+            myString = 'foo and bar',
+            myDate = new Date(),
+            myFunction,
+            myObject;
+
+        myFunction = function(arg){
+            console.log(arg);
+        }
+
+        myObject = new Person('Jack', 'Sparow');
+
+
+        /*Problem 2. Quoted text*/
+        var quotedText = '"How you doin\'?", Joey said.'
+
+        console.log('Problem 2. Quoted text');
+        console.log(quotedText);
+
+        /*Problem 3. Typeof variables*/
+        console.log('Problem 3. Typeof variables');
+        console.log('type of myInt: ', typeof myInt); //number
+        console.log('type of myFloat: ', typeof myFloat); //number
+        console.log('type of myBoolean: ', typeof myBoolean); // boolean
+        console.log('type of myJson: ', typeof myJson); // object
+        console.log('type of myArray: ', typeof myArray); // object
+        console.log('type of myString: ', typeof myString); // string
+        console.log('type of myDate: ', typeof myDate); // object
+        console.log('type of myFunction: ', typeof myFunction); //function
+        console.log('type of myObject: ', typeof myObject); //object
+
+
+        /*Problem 4. Typeof null*/
+        var myNull = null,
+            myUndefined;
+
+        console.log('Problem 4. Typeof null');
+        console.log('type of myNull: ', typeof myNull); //object
+        console.log('type of myUndefined: ', typeof myUndefined); //undefined
+    </script>
+</body>
+</html>

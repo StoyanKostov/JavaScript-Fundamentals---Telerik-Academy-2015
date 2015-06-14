@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Deep copy</title>
+</head>
+<body>
+	<h1>Problem 3. Deep copy</h1>
+	<ul>
+		<li>Write a function that makes a deep copy of an object.</li>
+		<li>The function should work for both primitive and reference types.</li>
+	</ul>
+	<script>
+		/**
+		 * Object deep copy first variant.
+		 * 
+		 * If object type Array, Array.isArray return false :-)
+		 */
+
+		function deepCopy(obj) {
+			var copy = Object.create(Object.getPrototypeOf(obj)),
+				propNames = Object.getOwnPropertyNames(obj);
+
+			propNames.forEach(function(name) {
+				var desc = Object.getOwnPropertyDescriptor(obj, name);
+
+				// Racursive invocation for values of type Object		
+				if (desc.value instanceof Object) {
+					desc.value = deepCopy(desc.value);
+				}
+
+				Object.defineProperty(copy, name, desc);
+			});
+
+			return copy;
+		}
+
+		// Init objects
+		var obj1 = { 
+				a: 1, 
+				b: {
+					foo: 21, 
+					bar: 13
+				}
+			},
+			obj1DeepCopy = deepCopy(obj1);
+
+		// Change value
+		obj1['b']['foo'] = 'changed value'
+
+		// Output both objects
+		console.log('Source', obj1);
+		console.log('Deep copy of source', obj1DeepCopy);
+		
+		/**
+		 * Object deep copy second variant.
+		 */
+
+		function deepCopyJSON(obj){
+			// Return all primitive values
+			// Else makes next racursive invocation
+			if (!(obj instanceof Object)) {
+				return obj;
+			}
+
+			var cloned = {};
+		    for (var prop in obj) {
+		    	// Racursive invocation for nested Jsons 
+		        cloned[prop] = deepCopyJSON(obj[prop]);
+		    }
+		    
+		    return cloned;
+		}
+
+		var obj2 = {
+				'a': 97, 
+				'b': 98, 
+				'c': '99', 
+				'special symbols' : {
+					'{': 123,
+					'|': 124,
+					'}': 125
+				} 
+			},
+			obj2DeepCopy = deepCopyJSON(obj2);
+			
+		// // Change first object
+		obj2['special symbols'] = '';
+
+		// Output both objects
+		console.log('Source', obj2);
+		console.log('Deep copy of source', obj2DeepCopy);
+
+	</script>
+</body>
+</html>

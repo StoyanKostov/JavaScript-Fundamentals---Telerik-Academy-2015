@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Min/Max of sequence</title>
+</head>
+<body>
+	<h1>Problem 3. Min/Max of sequence</h1>
+	<p>Write a script that finds the max and min number from a sequence of numbers.</p>
+    <label>Sequence(example: 1,2,-3,5,-10,99,8):</label><input type="text" name="sequence" id="sequence" value="" />
+    <button onclick="sequenceNumbers()">check</button>
+	<label>Min Number: </label><input id="min" name="min"></input>
+	<label>Max Number: </label><input id="max" name="max"></input>
+	<script>
+		var sequence = document.getElementById("sequence"),
+			min = document.getElementById("min"),
+			max = document.getElementById("max");
+		
+		function sequenceNumbers(){
+			var sequenceArray = (sequence.value).split(','),
+				bestMaxNumber = sequenceArray[0],
+				bestMinNumber = sequenceArray[0];
+			
+			for (var i = 1; i < sequenceArray.length; i++){
+				if (sequenceArray[i] > bestMaxNumber) {
+				  	bestMaxNumber = sequenceArray[i];
+				}
+				else if (sequenceArray[i] < bestMinNumber) {
+					bestMinNumber = sequenceArray[i];
+				}
+			}
+
+			min.value = bestMinNumber;
+			max.value = bestMaxNumber;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6.</title>
+</head>
+<body>
+	<h1>Problem 6.</h1>
+	<ul>
+		<li>Write a function that groups an array of people by age, first or last name.</li>
+		<li>The function must return an associative array, with keys - the groups, and values - arrays with people in this groups</li>
+		<li>Use function overloading (i.e. just one function)</li>
+	</ul>
+	<p>
+		Example:</br>
+		var people = {…};</br>
+		var groupedByFname = group(people, 'firstname');</br>
+		var groupedByAge= group(people, 'age');</br>
+
+	</p>
+	<script>
+		function group(people, prop){
+			if (!(people instanceof Object) || !prop) {
+				throw new Error('people is invalid or missing property');
+			}
+
+			var group = {};
+			group[prop] = [];
+
+			for(person in people){
+				group[prop].push(people[person]);
+			}
+
+			return group;
+		}
+
+		var people = [
+			{
+				firstname : 'Gosho', lastname: 'Petrov', age: 32
+			},
+			{
+				firstname : 'Bay', lastname: 'Ivan', age: 81
+			},
+			{
+				firstname : 'Me', lastname: 'JustMe', age: 12
+			}
+		];
+
+		console.log(group(people, 'firstname'));
+	</script>
+</body>
+</html>

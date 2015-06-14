@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 5. Youngest person</title>
+</head>
+<body>
+	<h1>Problem 5. Youngest person</h1>
+	<ul>
+		<li>Write a function that finds the youngest male person in a given array of people and prints his full name
+			<ul>
+				<li>Use only array methods and no regular loops (for, while)</li>
+				<li>Use Array#find</li>
+ 			</ul>
+		</li>
+	</ul>	
+	<script>
+		// Function for creating persons
+		function createPerson(firstname, lastname, age, gender){
+			var Person = {
+				firstname: firstname,
+				lastname: lastname,
+				age: age,
+				gender: gender
+			} 
+			return Person;
+		}
+
+		// Fill array with persons
+		var counter = 0,
+			sex = true,
+			persons = Array.apply(null, new Array(10)).map(function(item){
+				sex = sex?false:true
+				var firstname = 'Jone' + (++counter), 
+					lastname = 'Doe' + (counter),
+					age = 10 + counter,
+					gender = sex;
+
+				return createPerson(firstname, lastname, age, gender);
+			});
+
+		// function that finds the youngest male person in a given array of people and prints his full name
+		function findYoungestMale(arr){
+			var youngest = arr
+					.filter(function(element, index, array) { // get males ages
+	  					return element.gender == false;
+					})
+					.reduce(function(previousValue, currentValue, index, array) { //get yangest
+						if (previousValue.age < currentValue.age) {
+	  						return previousValue;
+						}
+						else{
+	  						return currentValue;
+						}
+					});
+
+			console.log('Yangest persons is %s %s at age %d', youngest.firstname, youngest.lastname, youngest.age);
+		}
+
+		// Main logic here
+		findYoungestMale(persons);
+	</script>
+</body>
+</html>

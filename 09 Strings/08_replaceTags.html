@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 8. Replace tags</title>
+</head>
+<body>
+	<h1>Problem 8. Replace tags</h1>
+	<ul>
+		<li>Write a JavaScript function that replaces in a HTML document given as string all the tags <a href="…">…</a> with corresponding tags [URL=…]…/URL].</li>
+	</ul>
+	<div>
+		<i>Example:</i>
+		<p>input: <xmp>'<p>Please visit <a href="http://academy.telerik.com">our site</a> to choose a training course. Also visit <a href="www.devbg.org">our forum</a> to discuss the courses.</p>'</xmp></p>
+		<p>output: <xmp>'<p>Please visit [URL=http://academy.telerik.com]our site[/URL] to choose a training course. Also visit [URL=www.devbg.org]our forum[/URL] to discuss the courses.</p>'</xmp></p>
+	</div>
+	<script>
+		// Test input
+		var str1 = '<p>Please visit <a href="http://academy.telerik.com">our site</a> to choose a training course. Also visit <a href="www.devbg.org">our forum</a> to discuss the courses.</p>';
+		
+		// Main logic
+		function parseAnchorTags(inputString){
+			var currOpenTag = inputString.indexOf('<a'),
+				currCloseTag = inputString.indexOf('a>', currOpenTag) + 2,
+				outputString = inputString.substring(0, currOpenTag),
+				inputStringLength = inputString.length;
+
+			if (currOpenTag === -1) {
+				return inputString;
+			}
+
+			while(currOpenTag < inputStringLength){
+				// Anchor is between the open and close tags from previous loop
+				outputString += processAnchorTag(inputString.substring(currOpenTag, currCloseTag));
+
+				// Set current open tag to be the first after close tag from prev loop
+				currOpenTag = inputString.indexOf('<a', currCloseTag);
+
+				// If no next open anchor tag set it to string length
+				// to be able to get text that follows anchor close tag in next step 
+				// and break the loop
+				if (currOpenTag === -1) {
+					currOpenTag = inputString.length;
+				}
+
+				// In this step currOpenTag is new one from current loop, but currCloseTag is still from previos loop
+				// Text is between the close tag from previous loop and start tag from current loop
+				outputString += inputString.substring(currCloseTag, currOpenTag);
+
+				// Set current close tag to be the first after opne tag from current loop
+				currCloseTag = inputString.indexOf('a>', currOpenTag) + 2;
+			}
+
+			return outputString;
+		}
+		
+		function processAnchorTag(anchor){
+			var anchorTextStart = anchor.indexOf('>') + 1,
+				anchorTextEnd = anchor.lastIndexOf('</'),
+				anchorText = anchor.substring(anchorTextStart, anchorTextEnd),
+				anchorHrefStart = anchor.indexOf('href="') + 6,
+				anchorHrefEnd = anchor.indexOf('"', anchorHrefStart),
+				anchorHref = anchor.substring(anchorHrefStart, anchorHrefEnd);
+
+			return '[URL=' + anchorHref + ']'+ anchorText + '[/URL]';
+		}
+
+		// Output
+		console.log(parseAnchorTags(str1));
+	</script>
+</body>
+</html>

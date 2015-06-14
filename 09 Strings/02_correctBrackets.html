@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 2. Correct brackets</title>
+</head>
+<body>
+	<h1>Problem 2. Correct brackets</h1>
+	<ul>
+		<li>Write a JavaScript function to check if in a given expression the brackets are put correctly.</li>
+	</ul>
+	<p>
+		<i>Example of correct expression: ((a+b)/5-d).</br>Example of incorrect expression: )(a+b)).</i>
+	</p>
+	<script>
+		var	string1 = '((a+b)/5-d)',
+			string2 = ')(a+b))';
+
+		function validateBrackets(string){
+			var	i,
+				counter = 0,
+				len = string.length,
+
+			for (i = 0; i < len; i += 1) {
+				if (string[i] == '(') {
+					counter += 1;
+				}
+				else if(string[i] == ')'){
+					counter -= 1;
+				}
+
+				if (counter < 0) {
+					return false;
+				}
+			};
+			return true;
+		}
+
+		validateBrackets(string1);
+		validateBrackets(string2);
+	</script>
+</body>
+</html>

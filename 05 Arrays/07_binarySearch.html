@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 7. Binary search</title>
+</head>
+<body>
+	<h1>Problem 7. Binary search</h1>
+	<ul>
+		<li>Write a script that finds the index of given element in a sorted array of integers by using the binary search algorithm.</li>
+	</ul>
+	<p>Write some numbers with separated by ", ".</p>
+	<p>Examle: "1, 2, 3, 4, 5, 6, 7, 8, 9"</p>
+    <label>array: </label><input type="text" name="Array" id="arr" value="" />
+    <label>element: </label><input type="text" name="key" id="element" value="" />
+    <button onclick="onClick()">check</button>
+	<label>Index: </label><input type="text" name="result" id="result" value="" />
+	<script>
+		var a = document.getElementById("arr"), // Entered  String
+			element = document.getElementById("element"), // Entered  String
+			result = document.getElementById("result");
+
+		function onClick(){
+			var	key = (element.value)*1,
+				arr = a.value.split(","); // Splits String into Array
+			
+			arr = arr.map(function(item){ // Parse strings to numbers
+				return item * 1;
+			});
+
+			result.value = binarySearch(arr, key, 0, arr.length - 1);
+		}
+
+		// Recursive function
+		function binarySearch(arr, key, imin, imax){
+			if (imin > imax) {
+				return "No index found";
+			}
+
+			var mid = Math.ceil((imin + imax) / 2);
+
+			if (key > arr[mid]) {
+				return binarySearch(arr, key, mid + 1, imax);
+			}
+			else if(key < arr[mid]){
+				return binarySearch(arr, key, imin, mid - 1);
+			}
+			else{
+				return mid;
+			}
+
+			// next invoke of function with new min and mid
+			return binarySearch(arr, key, imin, imax);
+		}
+	</script>
+</body>
+</html>

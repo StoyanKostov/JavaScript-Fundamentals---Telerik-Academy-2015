@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 5. Third bit</title>
+</head>
+<body>
+	<h1>Problem 5. Third bit</h1>
+	<p>Write a boolean expression for finding if the bit 3 (counting from 0) of a given integer is 1 or 0.</p>
+    <input type="text" name="number" id="number" value="" />
+    <input type="text" name="numberToBits" id="numberToBits" disabled="disabled" value="" />
+    <input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="getThirdBit()">check</button>
+    <script>
+        var number = document.getElementById("number"),
+        	numberToBits = document.getElementById("numberToBits"),
+			result = document.getElementById("result");
+			
+        function getThirdBit() {
+        	numberToBits.value = (number.value*1).toString(2); // Convert value to number, and than get its bits representation
+			result.value = (number.value >> 3) & 1;
+        }
+    </script>
+</body>
+</html>
+

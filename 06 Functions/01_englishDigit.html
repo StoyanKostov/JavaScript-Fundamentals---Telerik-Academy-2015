@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. English digit</title>
+</head>
+<body>
+	<h1>Problem 1. English digit</h1>
+	<ul>
+		<li>Write a function that returns the last digit of given integer as an English word.</li>
+	</ul>
+	<p>Examples: 512 -> "two", 1024 -> "four", 12309 -> "nine".</p>
+	<label>Number: </label><input type="text" name="number" id="number" value="" />
+	<button onclick="onClick()">Check</button>
+	<label>Result : </label><input id="result"/>
+	
+	<script>
+		var number = document.getElementById("number"),
+			result = document.getElementById("result");
+		
+		function onClick() {
+			result.value = getLastDigitAsString(number.value*1);
+		}
+
+		function getLastDigitAsString(number){
+			var lastDigit = number%10;
+			switch (lastDigit) {
+				case 0:
+					return "Zero";
+					break;
+				case 1:
+					return "One";
+					break;
+				case 2:
+					return "Two";
+					break;
+				case 3:
+					return "Three";
+					break;
+				case 4:
+					return "Four";
+					break;
+				case 5:
+					return "Five";
+					break;
+				case 6:
+					return "Six";
+					break;
+				case 7:
+					return "Seven";
+					break;
+				case 8:
+					return "Eight";
+					break;
+				case 9:
+					return "Nine";
+					break;
+				default:
+					return "Wrong input";
+			} 
+		}
+	</script>
+</body>
+</html>

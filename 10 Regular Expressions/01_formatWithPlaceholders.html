@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Format with placeholders</title>
+</head>
+<body>
+	<h1>Problem 1. Format with placeholders</h1>
+	<ul>
+		<li>Write a function that formats a string. The function should have placeholders, as shown in the example
+			<ul>
+				<li>Add the function to the String.prototype	</li>
+			</ul>
+		</li>
+	</ul>
+	<div>
+		<i>Example: HTML:</i>
+		<ul>
+			<li>
+				<span>input: var options = {name: 'John'}; 'Hello, there! Are you #{name}?'.format(options);</span>
+				<span>output: 'Hello, there! Are you John'</span>
+			</li>
+			<li>
+				<span>input: var options = {name: 'John', age: 13}; 'My name is #{name} and I am #{age}-years-old').format(options); 	</span>
+				<span>'My name is John and I am 13-years-old'</span>
+			</li>
+		</ul>
+	</div>
+
+	<div data-type="template" id="list-item" style="display: none;">
+		<strong>-{name}-</strong> <span>-{age}-</span>
+	</div>
+	<span>Demo:</span>
+	<p id="demo"></p>
+	<script>
+		if (!String.prototype.format) {
+			String.prototype.format = function(options){
+				var regex,
+					optionKeys = Object.keys(options),
+					string = this.valueOf();
+				
+				for (key in optionKeys) {
+					regex = new RegExp('#{' + optionKeys[key] + '}', 'g');
+					string = string.replace(regex , options[optionKeys[key]]);
+				};
+
+				return string;
+			}
+		}
+
+		console.log('My name is #{name} and I am #{age}-years-old'.format({name: 'John', age: 13}));
+		console.log('Hello, there! Are you #{name}?'.format({name: 'John'}));
+	</script>
+</body>
+</html>

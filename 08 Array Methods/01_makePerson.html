@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Make person</title>
+</head>
+<body>
+	<h1>Problem 1. Make person</h1>
+	<ul>
+		<li>Write a function for creating persons.
+			<ul>
+				<li>Each person must have firstname, lastname, age and gender (true is female, false is male)</li>
+ 			</ul>
+		</li>
+		<li>Generate an array with ten person with different names, ages and genders</li>
+	</ul>
+	<script>
+		function createPerson(firstname, lastname, age, gender){
+			var Person = {
+				firstname: firstname,
+				lastname: lastname,
+				age: age,
+				gender: gender
+			} 
+
+			return Person;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 10. Find palindromes</title>
+</head>
+<body>
+	<h1>Problem 10. Find palindromes</h1>
+	<ul>
+		<li>Write a program that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe".</li>
+	</ul>
+	<script>
+		// Test input
+		var str = 'Lorem ipsum dolod sit amet, consectetur adipiscing elitile, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+		
+		// Main logic
+		function getPalindromes(inputString){
+			return inputString.split(/\W/g).filter(checkForPalindrome);
+ 		}
+
+		function checkForPalindrome(element){
+			//Remove empty entries 
+			if (element === '') {
+				return false;
+			}
+
+			var i,
+				j,
+				midElementIndex = Math.floor(element.length);
+
+			for (i = 0, j = element.length - 1; i < midElementIndex; i += 1, j -= 1) {
+				//ckeck if curren left index value is equal to corresponding right index
+				if (element[i] !== element[j]) {
+					return false;
+				}
+			};
+
+			return true;
+		}
+	
+		// Output
+		console.log(getPalindromes(str));
+	</script>
+</body>
+</html>

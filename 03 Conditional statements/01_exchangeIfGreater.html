@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Exchange if greater</title>
+</head>
+<body>
+	<h1>Problem 1. Exchange if greater</h1>
+	<p>Write an if statement that takes two double variables a and b and exchanges their values if the first one is greater than the second.</p>
+	<p>As a result print the values a and b, separated by a space.</p>
+
+    <label>First variable:</label><input type="text" name="first" id="first" value="" />
+    <label>Second variable:</label><input type="text" name="second" id="second" value="" />
+    <button onclick="exchangeValues()">exchange</button>
+	<script>
+		var first = document.getElementById("first"),
+			second = document.getElementById("second");
+
+		function exchangeValues(){
+			// Get input values and parse them to numbers
+			var firstValue = first.value*1,
+				secondValue = second.value*1;
+
+			if (firstValue > secondValue) {
+				//Exchange values without temp variable
+				firstValue = firstValue + secondValue;
+				secondValue = firstValue - secondValue;
+				firstValue = firstValue - secondValue;
+
+				// Set values
+				first.value = firstValue;
+				second.value = secondValue;
+			}
+		}
+	</script>
+</body>
+</html>

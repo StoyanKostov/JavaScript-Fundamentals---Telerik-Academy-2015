@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 5. Appearance count</title>
+</head>
+<body>
+	<h1>Problem 5. Appearance count</h1>
+	<ul>
+		<li>Write a function that counts how many times given number appears in given array.</li>
+		<li>Write a test function to check if the function is working correctly.</li>
+	</ul>
+	<p>Write some numbers with separated by ", ".</p>
+	<p>Examle: "4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3"</p>
+    <label>Array: </label><input type="text" name="array" id="arr" value="" />
+    <label>Number: </label><input type="text" name="number" id="number" value="" />
+	<button id="counterTrigger">Click</button>
+	<p>Count: <span id="result"></span></p>
+		
+	<script>
+		var array = document.getElementById("arr"),
+			number = document.getElementById("number"),
+			result = document.getElementById("result"),
+			counterTrigger = document.getElementById("counterTrigger");
+		
+
+		function onCount() {
+			var arr = array.value.split(",").map(function(item){ // Parse strings to numbers
+				return item * 1;
+			});
+
+			result.innerHTML = getNumberCount(arr, number.value*1);
+		}
+		// Event listener
+		counterTrigger.addEventListener("click", onCount, false);
+
+		// main logic
+		function getNumberCount(array, number){
+			var count = 0;
+			for (var i = array.length - 1; i >= 0; i -= 1) {
+				if (number === array[i]) {
+					count += 1;
+				}
+			};
+			return count;
+		}
+
+		// test function
+		// This is modern modul design pattern
+		var assert = (function(){
+			return {
+				counter: function(array, number, expected){
+					if (Array.isArray(array) && Number.isInteger(number) && Number.isInteger(expected)) {
+						return getNumberCount(array, number) === expected;
+					}
+					else{
+						return "Wrong input";
+					}
+				}
+				// Other methods here
+			};
+		})();
+
+		// test function can be invoked as follows
+		// assert.counter(array, number, expected);
+
+	</script>
+</body>
+</html>

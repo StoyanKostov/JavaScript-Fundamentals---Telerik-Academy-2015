@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Reverse string</title>
+</head>
+<body>
+	<h1>Problem 1. Reverse string</h1>
+	<ul>
+		<li>Write a JavaScript function that reverses a string and returns it.</li>
+	</ul>
+	<script>
+		function reverseString(string){
+			return string.split('').reverse().join('');
+		}
+
+		var string1 = 'sample';
+		console.log('String "%s", reversed "%s"', string1, reverseString(string1));
+	</script>
+</body>
+</html>

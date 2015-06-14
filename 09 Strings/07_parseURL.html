@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 7. Parse URL</title>
+</head>
+<body>
+	<h1>Problem 7. Parse URL</h1>
+	<ul>
+		<li>Write a script that parses an URL address given in the format: [protocol]://[server]/[resource] and extracts from it the [protocol], [server] and [resource] elements.</li>
+		<li>Return the elements in a JSON object.</li>
+	</ul>
+	<div>
+		<i>Example:</i>
+		<p>http://telerikacademy.com/Courses/Courses/Details/239</p>
+		<p>{protocol: http,	server: telerikacademy.com, resource: /Courses/Courses/Details/239}</p>
+	</div>
+	<script>
+		// Get content of a html page
+		var url = 'http://telerikacademy.com/Courses/Courses/Details/239',
+			url1 = 'http://telerikacademy.com/Courses/Courses/Details/239/',
+			url2 = 'http://telerikacademy.com',
+			url3 = 'http://telerikacademy.com/',
+			url4 = 'http://telerikacademy.com/#dsgdfgdsfg';
+		
+		function parseUrl(inputUrl){
+			var outputJSON = {},
+				partStartIndex,
+				partEndIndex;
+
+			//Get protocol
+			partStartIndex = 0;
+			partEndIndex = inputUrl.indexOf('://');
+			outputJSON['protocol'] = inputUrl.substring(partStartIndex, partEndIndex);
+
+			//Get server
+			partStartIndex = partEndIndex + 3;
+			partEndIndex = inputUrl.indexOf('/', partStartIndex);
+
+			partEndIndex = partEndIndex !== -1?partEndIndex:(inputUrl.length); // Check if follows resourse 
+
+			outputJSON['server'] = inputUrl.substring(partStartIndex, partEndIndex);
+
+			//Get resourse
+			outputJSON['resource'] = inputUrl.substring(partEndIndex);
+
+			return outputJSON;
+		}
+		
+		// Output
+		console.log(parseUrl(url));
+		console.log(parseUrl(url1));
+		console.log(parseUrl(url2));
+		console.log(parseUrl(url3));
+		console.log(parseUrl(url4));
+	</script>
+</body>
+</html>

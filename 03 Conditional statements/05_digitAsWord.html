@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 5. Digit as word</title>
+</head>
+<body>
+	<h1>Problem 5. Digit as word</h1>
+	<ul>
+		<li>Write a script that asks for a digit (0-9), and depending on the input, shows the digit as a word (in English).</li>
+		<li>Print "not a digit" in case of invalid input.</li>
+		<li> Use a switch statement.</li>
+	</ul>
+    <label>Digit:</label><input type="text" name="digit" id="digit" value="" />
+    <label>Name:</label><input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="digitAsWord()">check</button>
+	<script>
+		var result = document.getElementById("result"),
+			digit = document.getElementById("digit");
+
+		function digitAsWord(){
+			switch (digit.value) {
+				case '0': result.value = "Zero"; 
+					break;
+				case '1': result.value = "One"; 
+					break;
+				case '2': result.value = "Two"; 
+					break;
+				case '3': result.value = "Three"; 
+					break;
+				case '4': result.value = "Four";
+					break;
+				case '5': result.value = "Five";
+					break;
+				case '6': result.value = "Six";
+					break;
+				case '7': result.value = "Seven";
+					break;
+				case '8': result.value = "Eight";
+					break;
+				case '9': result.value = "Nine";
+					break;
+				default: result.value = "not a digit";
+			} 
+		}
+		
+	</script>
+</body>
+</html>

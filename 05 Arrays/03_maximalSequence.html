@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Maximal sequence</title>
+</head>
+<body>
+	<h1>Problem 3. Maximal sequence</h1>
+	<p>Write a script that finds the maximal sequence of equal elements in an array.</p>
+	<p>Write some numbers with separated by SPACE.</p>
+	<p>Examle: "1 2 3 4 5 6"</p>
+    <label>Array: </label><input type="text" name="Array" id="arr" value="" />
+    <button onclick="maximalSequence()">check</button>
+	<p>Result : </p><p id="result"></p>
+	<script>
+		var a = document.getElementById("arr"), // Entered  String
+			result = document.getElementById("result");
+
+		function maximalSequence(){
+			var	arr = a.value.split(" "), // Splits String into Array
+				bestSequence = [];
+			
+			for (var i = 0, len = arr.length; i < len; i += 1) {
+				var counter = 1,
+					j = i + 1;
+
+				while(arr[i] === arr[j]){
+					counter += 1;
+					j += 1;
+				}
+
+				if (counter > bestSequence.length) {
+					bestSequence = arr.slice(i, (i + counter));
+				}
+				
+			}
+			
+			result.innerHTML = bestSequence;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 5. Youngest person</title>
+</head>
+<body>
+	<h1>Problem 5. Youngest person</h1>
+	<ul>
+		<li>Write a function that finds the youngest person in a given array of people and prints his/hers full name</li>
+		<li>Each person has properties firstname, lastname and age.</li>
+	</ul>
+	<p>
+		Example:</br>
+		var people = [</br>
+		  { firstname : 'Gosho', lastname: 'Petrov', age: 32 },</br>
+		  { firstname : 'Bay', lastname: 'Ivan', age: 81},</br>
+		  { firstname : 'Me', lastname: 'JustMe', age: 12,];</br>
+
+	</p>
+	<script>
+		function findYoungestPerson(obj){
+			if (!(obj instanceof Object)) {
+				throw new Error('object is invalid');
+			}
+
+			var bestYoungest = obj[0];
+			for (var i = 1, len = obj.length; i < len; i += 1) {
+				if (bestYoungest['age'] > obj[i]['age']) {
+					bestYoungest = obj[i];
+				}
+			}
+			console.log("The youngest pearson is %s %s at age %d", bestYoungest['firstname'], bestYoungest['lastname'], bestYoungest['age']);
+		}
+
+		var people = [
+			{
+				firstname : 'Gosho', lastname: 'Petrov', age: 32
+			},
+			{
+				firstname : 'Bay', lastname: 'Ivan', age: 81
+			},
+			{
+				firstname : 'Me', lastname: 'JustMe', age: 12
+			}
+		];
+
+		findYoungestPerson(people);
+	</script>
+</body>
+</html>

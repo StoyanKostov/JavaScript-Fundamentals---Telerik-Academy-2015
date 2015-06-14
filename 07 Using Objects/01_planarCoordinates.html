@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Planar coordinates</title>
+</head>
+<body>
+	<h1>Problem 1. Planar coordinates</h1>
+	<ul>
+		<li>Write functions for working with shapes in standard Planar coordinate system.
+			<ul>
+				<li>Points are represented by coordinates P(X, Y)</li>
+				<li>Lines are represented by two points, marking their beginning and ending L(P1(X1,Y1), P2(X2,Y2))</li>
+			</ul>
+		</li>
+		<li>Calculate the distance between two points.</li>
+		<li>Check if three segment lines can form a triangle.</li>
+	</ul>
+	<script>
+		function Point(x, y){
+			if (!isNumber(x) || !isNumber(x)) {
+				throw new Error('X and Y should be numbers.');
+			}
+
+			this.x = x;
+			this.y = y;
+		}
+
+		function Line(firstPoint, secondPonit){
+			if (!(firstPoint instanceof Point) || !(secondPonit instanceof Point)) {
+				throw new Error("firstPoint and secondPonit should be instances of Point");
+			}
+
+			this.firstPoint = firstPoint;
+			this.secondPonit = secondPonit;
+		}
+		// Calculate the distance between two points.
+		Line.prototype.getLength = function(){
+			var a = this.firstPoint.x - this.secondPonit.x,
+				b = this.firstPoint.y - this.secondPonit.y,
+				c =  Math.sqrt(a*a + b*b); // Pythagorean theorem
+			return c;
+		};
+
+		function Triangle(firstLine, secondLine, thirdLine){
+			if (!(firstLine instanceof Line) || !(secondLine instanceof Line) || !(thirdLine instanceof Line)) {
+				throw new Error("firstLine, secondLine and thirdLine should be instances of Line");
+			}
+
+			// Check if three segment lines can form a triangle.
+			function validateLines(firstLine, secondLine, thirdLine){
+				var firstCondition =  firstLine.getLength() + secondLine.getLength() > thirdLine.getLength(),
+					secondCondition =  firstLine.getLength() + thirdLine.getLength() > secondLine.getLength(),
+					thirdCondition =  thirdLine.getLength() + secondLine.getLength() > firstLine.getLength();
+
+				// https://answers.yahoo.com/question/index?qid=20090804172629AAmFopW
+				if (!firstCondition || !secondCondition || !thirdCondition) {
+					throw new Error("firstLine, secondLine and thirdLine can not form triangle");
+				}
+			}
+			validateLines(firstLine, secondLine, thirdLine);
+
+			this.firstLine = firstLine;	
+			this.secondLine = secondLine;
+			this.thirdLine = thirdLine;
+		}
+
+		// Tests
+		// For the purpose of brevity create Point objects directly in Line constructor
+		var line1 = new Line(new Point(1,1), new Point(1,5)),
+			line2 = new Line(new Point(1,1), new Point(6,1)),
+			line3 = new Line(new Point(6,1), new Point(1,5)),
+			line4 = new Line(new Point(1,1), new Point(1,2)),
+			line5 = new Line(new Point(1,4), new Point(1,5)),
+			triangle1 = new Triangle(line1, line2, line3), // Passes validation and creates object
+			triangle2 = new Triangle(line1, line4, line5); // Throws exeption (line1 > line4 + line5)
+
+		// Helper functions
+		// http://stackoverflow.com/questions/18082/validate-decimal-numbers-in-javascript-isnumeric
+		function isNumber(n) {
+			return !isNaN(parseFloat(n)) && isFinite(n);
+		}
+
+	</script>
+</body>
+</html>

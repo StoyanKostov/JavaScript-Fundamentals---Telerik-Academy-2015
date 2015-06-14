@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 12. Generate list</title>
+</head>
+<body>
+	<h1>Problem 12. Generate list</h1>
+	<ul>
+		<li>Write a function that creates a HTML <xmp><ul></xmp> using a template for every HTML <xmp><li></xmp>.</li>
+		<li>The source of the list should be an array of elements.</li>
+		<li> Replace all placeholders marked with –{…}– with the value of the corresponding property of the object.</li>
+	</ul>
+	<div>
+		<i>Example: HTML:</i>
+
+		<i>JavaScript:</i>
+		<xmp>
+			var people = [{name: 'Peter', age: 14},…];
+			var tmpl = document.getElementById('list-item').innerHtml;
+			var peopleList = generateList(people, template);
+			//peopleList = '<ul><li><strong>Peter</strong> <span>14</span></li><li>…</li>…</ul>'
+		</xmp>
+	</div>
+
+	<div data-type="template" id="list-item" style="display: none;">
+		<strong>-{name}-</strong> <span>-{age}-</span>
+	</div>
+	<span>Demo:</span>
+	<p id="demo"></p>
+	<script>
+		var template = document.getElementById("list-item").innerHTML,
+			demo = document.getElementById("demo"),
+			people = [{name: 'Peter', age: 14}, {name: 'Kamen', age: 24}, {name: 'Stoyan', age: 34}];
+
+		// Main logic
+		function buildHTML(inputArr, template){
+			var i,
+				outPutString = '',  
+				inputArrLength = inputArr.length,
+				liNode = '<li>' + template.trim() + '</li>';
+			
+			for (i = 0; i < inputArrLength; i += 1) {
+				outPutString += liNode
+									.replace(/-{name}-/, inputArr[i].name)
+									.replace(/-{age}-/, inputArr[i].age);
+			};
+
+			return '<ul>' + outPutString + '</ul>';
+ 		}
+
+		// Output
+		demo.innerHTML = buildHTML(people, template);
+		console.log(buildHTML(people, template));
+	</script>
+</body>
+</html>

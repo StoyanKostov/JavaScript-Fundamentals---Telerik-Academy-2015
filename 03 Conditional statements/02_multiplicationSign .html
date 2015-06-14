@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 2. Multiplication Sign</title>
+</head>
+<body>
+	<h1>Problem 2. Multiplication Sign</h1>
+	<p>Write a script that shows the sign (+, - or 0) of the product of three real numbers, without calculating it.</p>
+	<p>Use a sequence of if operators.</p>
+    <label>First number:</label><input type="text" name="first" id="first" value="" />
+    <label>Second number:</label><input type="text" name="second" id="second" value="" />
+    <label>Third number:</label><input type="text" name="third" id="third" value="" />
+    <input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="checkMultiplicationSign()">check</button>
+	<script>
+		var result = document.getElementById("result"),
+			first = document.getElementById("first"),
+			second = document.getElementById("second"),
+			third = document.getElementById("third");
+
+		function checkMultiplicationSign(){
+			if ((first.value === '0') || (second.value === '0') || (third.value === '0')) {
+				result.value = "0";
+			}
+			else if ((first.value > 0) ^ (second.value > 0) ^ (third.value > 0)) {
+				result.value = "+";
+			}
+			else {
+				result.value = "-";
+			}
+		}
+	</script>
+</body>
+</html>

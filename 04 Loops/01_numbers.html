@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 1. Numbers</title>
+</head>
+<body>
+	<h1>Problem 1. Numbers</h1>
+	<p>Write a script that prints all the numbers from 1 to N.</p>
+    <label>number:</label><input type="text" name="number" id="number" value="" />
+    <button onclick="numbersRange()">check</button>
+	<label>Result: </label><textarea cols="50" id="result"></textarea>
+	<script>
+		var result = document.getElementById("result"),
+			number = document.getElementById("number");
+
+		function numbersRange(){
+			var numberValue = number.value*1,
+				numbersArray = [],
+				i = 1;
+
+			while (i <= numberValue) {
+				numbersArray.push(i);
+				i++;
+			}
+			
+			result.value = numbersArray.join(', ');
+		}
+	</script>
+</body>
+</html>

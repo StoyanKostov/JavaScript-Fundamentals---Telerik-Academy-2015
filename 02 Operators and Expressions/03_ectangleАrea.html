@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem 3. Rectangle area</title>
+</head>
+<body>
+    <h1>Problem 3. Rectangle area</h1>
+	<p>Write an expression that calculates rectangle’s area by given width and height.</p>
+    <input type="text" name="width" id="width" value="" />
+	<input type="text" name="height" id="height" value="" />
+    <input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="calculateArea()">check</button>
+    <script>
+        var a = document.getElementById("width"),
+            b = document.getElementById("height"),
+            result = document.getElementById("result");
+
+        function calculateArea() {
+            result.value = a.value*b.value;
+        }
+    </script>
+</body>
+</html>

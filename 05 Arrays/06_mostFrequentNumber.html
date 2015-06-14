@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6. Most frequent number</title>
+</head>
+<body>
+	<h1>Problem 6. Most frequent number</h1>
+	<ul>
+		<li>Write a script that finds the most frequent number in an array.</li>
+	</ul>
+	<p>Write some numbers with separated by ", ".</p>
+	<p>Examle: "4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3"</p>
+    <label>Array: </label><input type="text" name="array" id="arr" value="" />
+    <button onclick="getMostFrequent()">check</button>
+	<p>Result : </p><p id="result"></p>
+	<script>
+		var a = document.getElementById("arr"), // Entered  String
+			result = document.getElementById("result");
+
+		function getMostFrequent(){
+			var	startNumber,
+				bestNumber,
+				tempArr = [],
+				startNumberCounter = 1,
+				bestNumberCounter = 1,
+				arr = a.value.split(","); // Splits String into Array
+			
+			arr = arr.map(function(item){ // Parse strings to numbers
+				return item * 1;
+			});
+
+			console.log(arr)
+
+			while(arr.length > 0) {
+				//Get first array item
+				startNumber = arr[0];
+
+				//Start looping from second index
+				for (var i = 1, len = arr.length; i < len; i += 1) {
+					//If there is a value match with other array indexes, increment counter
+					if (startNumber === arr[i]) {
+						//startNumber = arr[i];
+						startNumberCounter += 1;
+					}
+					else{
+						tempArr.push(arr[i]);
+					}
+				};
+
+				// Set current best number
+				if (bestNumberCounter < startNumberCounter) {
+					bestNumberCounter = startNumberCounter;
+					bestNumber = startNumber;
+				};
+				startNumberCounter = 0;
+
+				// Temp array does not contain current start number values
+				// that is how we clear it from array
+				arr = tempArr;
+				tempArr = [];
+			}
+
+			result.innerHTML = bestNumber;
+		}
+	</script>
+</body>
+</html>

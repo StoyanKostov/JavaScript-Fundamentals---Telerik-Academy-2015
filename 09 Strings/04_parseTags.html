@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Parse tags</title>
+</head>
+<body>
+	<h1>Problem 4. Parse tags</h1>
+	<ul>
+		<li>You are given a text. Write a function that changes the text in all regions:</li>
+	</ul>
+	<xmp>
+		<upcase>text</upcase> to uppercase.</br>
+		<lowcase>text</lowcase> to lowercase</br>
+		<mixcase>text</mixcase> to mix casing(random)</br>
+	</xmp>
+	<p>
+		Example: <xmp>We are <mixcase>living</mixcase> in a <upcase>yellow submarine</upcase>. We <mixcase>don't</mixcase> have <lowcase>anything</lowcase> else.</xmp>
+		The expected result:
+		We are LiVinG in a YELLOW SUBMARINE. We dOn'T have anything else.
+		Note: Regions can be nested.
+	</p>
+	<script>
+		//Extend String prototype
+		if (!String.prototype.toMixinCase) {
+			String.prototype.toMixinCase = function(first_argument) {
+				var currStr = '',
+					flipingValueBool = true;
+				for (var i = 0, len = this.length; i < len; i += 1){
+					flipingValueBool = flipingValueBool?false:true;
+					if (flipingValueBool) {
+						currStr += this[i].toUpperCase();
+					}
+					else{
+						currStr += this[i].toLowerCase();
+					}
+				};
+				return currStr;
+			}
+		}
+
+		// Set input data
+		var	string = "We are <mixcase>living</mixcase> in a <upcase>yellow submarine</upcase>. We <mixcase>don't</mixcase> have <lowcase>anything</lowcase> else.",
+			string1 = "We are <mixcase>living</mixcase> in a <upcase>yellow <mixcase>living</mixcase> submarine</upcase>. We <mixcase>don't</mixcase> have <lowcase>anything</lowcase> else.";
+
+		function parseTags(string){
+			var parsedString = "",
+				currTagType = {},
+				i,
+				len = string.length,
+				tagTypes = {
+					m: {
+						value: 'mixcase',
+						open: '<mixcase>',
+						close: '</mixcase>'
+					},
+					u: {
+						value: 'upcase',
+						open: '<upcase>',
+						close: '</upcase>'
+					},
+					l: {
+						value: 'lowcase',
+						open: '<lowcase>',
+						close: '</lowcase>'
+					}
+				};
+
+			for (i = 0; i < len; i += 1) {
+				// Text in custom tags
+				if (string[i] === '<' && string[i + 1] !== '/') {
+					var tagTextStartIndex = 0,
+						tagTextEndIndex = 0,
+						processTextPartial = '';
+
+					//Get current tag type
+					currTagType = getCurrTagType(string, i, tagTypes);
+
+					//Get start and end indexes of current tag text
+					tagTextStartIndex = i + currTagType.open.length;
+					tagTextEndIndex = string.toLowerCase().indexOf(currTagType.close, i);//toLower case if tag nested
+
+					// With start and end indexes of inner text process(set to coresponding case) and return it
+					processTextPartial = processText(tagTextStartIndex, tagTextEndIndex, string, currTagType);
+
+					//Recursively invoke function if nested tags
+					if (processTextPartial.indexOf('<') != -1) {
+						processTextPartial = parseTags(processTextPartial);
+					}
+
+					parsedString += processTextPartial;
+
+					//Set i to be the last index of current closing tag
+					i = tagTextEndIndex + currTagType.close.length - 1;
+
+				}
+				// Text out of custom tags
+				else{
+					// get text between curren index (i) and opening of next tag
+					var nextTagStartIndex = string.toLowerCase().indexOf('<', i);
+
+					//If no custom tags follow 
+					if (nextTagStartIndex === -1) {
+						nextTagStartIndex = string.length;
+					}
+
+					parsedString += string.substring(i, nextTagStartIndex);
+					i = nextTagStartIndex - 1;
+				}
+			};
+
+			return parsedString;
+		}
+
+		// Set text to coresponding case
+		function processText(start, end, string, tagType){
+			var str = string.substring(start, end);
+			switch(tagType.value) {
+				case 'mixcase':
+					str = str.toMixinCase(); //Method extended at the start of the script
+ 					break;
+				case 'upcase':
+					str = str.toUpperCase();
+					break;
+				case 'lowcase':
+					str = str.toLowerCase();
+					break;
+			} 
+
+			return str;
+		}
+
+		function getCurrTagType(string, currIndex, tagTypes){
+			//Get first letter after opening of custom tag and returns coresponding tag type
+			//Get it to lowercase if tag nested in other tags
+			return tagTypes[string[currIndex + 1].toLowerCase()];
+		}	
+
+		console.log('No nesting of tahgs');
+		console.log(parseTags(string));
+
+		console.log('Nested tags');
+		console.log(parseTags(string1));
+
+
+	</script>
+</body>
+</html>

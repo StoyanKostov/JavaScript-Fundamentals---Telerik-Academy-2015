@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6. Extract text from HTML</title>
+</head>
+<body>
+	<h1>Problem 6. Extract text from HTML</h1>
+	<ul>
+		<li>Write a function that extracts the content of a html page given as text.</li>
+		<li>The function should return anything <span>that is </span>in a tag, without the tags.</li>
+	</ul>
+	<p>
+	<i>Example:</i>
+	<xmp>
+		<html>
+			<head>
+				<title>Sample site</title>
+			</head>
+			<body>
+				<div>text
+					<div>more text</div>
+					and more...
+				</div>
+				in body
+			</body>
+		</html>
+	</xmp>
+	<i>Result:</i> Sample sitetextmore textand more...in body
+	</p>
+	<script>
+		// Get content of a html page
+		var htmlNodeInnerHTML = document.getElementsByTagName('html')[0].innerHTML,
+			textSrt = '<html><head><title>Sample site</title></head><body><div>text<div>more text</div>and more...</div>in body</body></html>',
+			textSrt1 = '<head><title>Sample site</title></head><div>text<div>more text</div>and more...</div>';
+		
+
+		// Avtomat
+		// след 1:55 обяснява какво е автомат 
+		// http://nikolay.it/content/videos/2012-01/16-Strings.mp4 
+		function stripTags(inputString){
+			var outputString = '',
+				i,
+				len = inputString.length,
+				isInTagState = true;
+
+			for (i = 0; i < len; i += 1) {
+				if (!isInTagState) {
+					outputString += inputString[i];
+				}
+
+				if (inputString[i + 1] === '<') {
+					isInTagState = true;
+				}
+				else if(inputString[i] === '>' && inputString[i + 1] !== '<'){
+					isInTagState = false;
+				}
+			};
+			return outputString;
+		}
+		console.log(stripTags(textSrt));
+	</script>
+</body>
+</html>

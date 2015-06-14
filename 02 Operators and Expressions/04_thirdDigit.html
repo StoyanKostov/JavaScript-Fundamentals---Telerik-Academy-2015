@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Third digit</title>
+</head>
+<body>
+	<h1>Problem 4. Third digit</h1>
+	<p>Write an expression that checks for given integer if its third digit (right-to-left) is 7.</p>
+    <input type="text" name="td" id="td" value="" />
+    <input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="isThirdDigitEqualTo7()">check</button>
+    <script>
+        var number = document.getElementById("td"),
+            result = document.getElementById("result");
+
+        function isThirdDigitEqualTo7() {
+            result.value = 7 == Math.floor(number.value/100)%10;
+        }
+    </script> 
+</body>
+</html>

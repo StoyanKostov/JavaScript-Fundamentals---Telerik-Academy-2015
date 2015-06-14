@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 9. Extract e-mails</title>
+</head>
+<body>
+	<h1>Problem 9. Extract e-mails</h1>
+	<ul>
+		<li>Write a function for extracting all email addresses from given text.</li>
+		<li>All sub-strings that match the format @… should be recognized as emails.</li>
+		<li>Return the emails as array of strings.</li>
+	</ul>
+	<script>
+		// Test input
+		var str = 'Please visit <a href="http://academy.telerik.com">our site</a> myname@mail.com to choose a training course. Also yourname@mail5.bg visit <a href="www.devbg.org">our forum</a> to theyname@mailjs.js discuss the courses.</p>';
+		
+		// Main logic
+		function getEmails(inputString){
+			var outPutArrya = [],
+				currAtSignIndex = inputString.indexOf('@'),
+				inputStringLength = inputString.length;
+
+			//If no mails
+			if (currAtSignIndex === -1) {
+				return outPutArrya;
+			}
+
+			while(true){
+				outPutArrya.push(getNextmail(currAtSignIndex, inputString));
+				currAtSignIndex = inputString.indexOf('@', currAtSignIndex + 1);
+				if (currAtSignIndex === -1) {
+					break;
+				}
+			}
+
+			return outPutArrya;
+		}
+
+		function getNextmail(atSignIndex, inputString){
+			var mailStartIndex = inputString.lastIndexOf(" ", atSignIndex) + 1,
+				mailEndIndex = inputString.indexOf(" ", atSignIndex);
+
+			return inputString.substring(mailStartIndex, mailEndIndex);
+		}
+		
+		// Output
+		console.log(getEmails(str));
+	</script>
+</body>
+</html>

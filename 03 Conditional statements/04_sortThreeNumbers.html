@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Sort 3 numbers</title>
+</head>
+<body>
+	<h1>Problem 4. Sort 3 numbers</h1>
+	<p>Sort 3 real values in descending order.</p>
+	<p>Use nested if statements.</p>
+	<p><i>Note: Don not use arrays and the built-in sorting functionality.</i></p>
+    <label>First number:</label><input type="text" name="first" id="first" value="" />
+    <label>Second number:</label><input type="text" name="second" id="second" value="" />
+    <label>Third number:</label><input type="text" name="third" id="third" value="" />
+    <input type="text" name="result" id="result" disabled="disabled" value="" />
+    <button onclick="sortNumbers()">check</button>
+	<script>
+		var result = document.getElementById("result"),
+			first = document.getElementById("first"),
+			second = document.getElementById("second"),
+			third = document.getElementById("third");
+
+		function sortNumbers(){
+			var firstValue = first.value*1,
+				secondValue = second.value*1,
+				thirdValue = third.value*1;
+
+			if (firstValue > secondValue && secondValue > thirdValue) {
+				result.value = firstValue + " > " + secondValue + " > " + thirdValue;
+			}
+			else {
+				if (firstValue > thirdValue && thirdValue > secondValue) {
+					result.value = firstValue + " > " + thirdValue + " > " + secondValue;
+				}
+				else {
+					if (thirdValue > firstValue && firstValue > secondValue) {
+						result.value = thirdValue + " > " + firstValue + " > " + secondValue;
+					}
+					else {
+						if (secondValue > firstValue && firstValue > thirdValue) {
+							result.value = secondValue + " > " + firstValue + " > " + thirdValue;
+						}
+						else{
+							if (secondValue > thirdValue && thirdValue > firstValue) {
+								result.value = secondValue + " > " + thirdValue + " > " + firstValue;
+							}
+							else{
+								result.value = thirdValue + " > " + secondValue + " > " + firstValue;
+							}
+						}
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

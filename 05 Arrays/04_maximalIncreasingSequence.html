@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Maximal increasing sequence</title>
+</head>
+<body>
+	<h1>Problem 4. Maximal increasing sequence</h1>
+	<p>Write a script that finds the maximal increasing sequence in an array.</p>
+	<p>Write some numbers with separated by SPACE.</p>
+	<p>Examle: "1 2 3 4 5 6"</p>
+    <label>Array: </label><input type="text" name="Array" id="arr" value="" />
+    <button onclick="maxIncreasingSequence()">check</button>
+	<p>Result : </p><p id="result"></p>
+	<script>
+		var a = document.getElementById("arr"), // Entered  String
+			result = document.getElementById("result");
+
+		function maxIncreasingSequence(){
+			var	arr = a.value.split(" "), // Splits String into Array
+				bestSequence = [];
+			
+			console.log('arr', arr);
+			for (var i = 0, len = arr.length; i < len; i += 1) {
+				var counter = 1,
+					j = i;
+
+				// main logic here curr index value + 1 === next index value 
+				while(arr[j]*1 + 1 === arr[j + 1]*1){
+					counter += 1;
+					j += 1;
+				}
+
+				if (counter > bestSequence.length) {
+					bestSequence = arr.slice(i, (i + counter));
+				}
+				
+			}
+
+			result.innerHTML = bestSequence;
+		}
+	</script>
+</body>
+</html>

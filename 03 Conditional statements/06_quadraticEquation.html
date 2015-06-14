@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6. Quadratic equation</title>
+
+</head>
+<body>
+	<h1>Problem 6. Quadratic equation</h1>
+	<ul>
+		<li>Write a script that reads the coefficients a, b and c of a quadratic equation ax2 + bx + c = 0 and solves it (prints its real roots).</li>
+		<li>Calculates and prints its real roots.</li>
+	</ul>	
+    <label>coefficient a:</label><input type="text" name="a" id="a" value="" />
+    <label>coefficient b:</label><input type="text" name="b" id="b" value="" />
+    <label>coefficient c:</label><input type="text" name="c" id="c" value="" />
+    <label>Result:</label><textarea type="text" name="result" id="result" disabled="disabled" value=""></textarea>
+	<button onclick="getRealRoots()">check</button>
+	<script>
+	 	var result = document.getElementById("result"),
+			a = document.getElementById("a"),
+			b = document.getElementById("b"),
+			c = document.getElementById("c");
+			
+		function getRealRoots(){
+			var aValue = a.value*1,
+				bValue = b.value*1,
+				cValue = c.value*1,
+				d = bValue * bValue - 4 * aValue * cValue,
+		 		x1,
+		 		x2;
+		 		
+			if (d < 0) {
+				result.value = "no real roots";
+			}
+			else if (d === 0) {
+				result.value = "x1 = x2 = " + (-bValue / (2 * aValue));
+			}
+			else {
+				x1 = (-bValue - Math.sqrt(d)) / (2 * aValue);
+				x2 = (-bValue + Math.sqrt(d)) / (2 * aValue);
+				result.value = "X1 = " + x1 + "; X2 = " + x2;
+			}
+		}
+	</script>
+</body>
+</html>

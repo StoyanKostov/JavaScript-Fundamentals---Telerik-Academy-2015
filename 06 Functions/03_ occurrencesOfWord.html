@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Occurrences of word</title>
+</head>
+<body>
+	<h1>Problem 3. Occurrences of word</h1>
+	<ul>
+		<li>Write a function that finds all the occurrences of word in a text.</li>
+		<li>The search can be case sensitive or case insensitive.</li>
+		<li>Use function overloading.</li>
+	</ul>
+	<label>Word: </label><input type="text" name="word" id="word" value=""/>
+	<input type="radio" name="flag" id="sensitive" value="true"><label>sensitive</label>
+	<input type="radio" name="flag" id="insensitive" value="false" checked><label for="insensitive">insensitive</label>
+	<label>Text: </label><textarea type="text" name="inputText" id="inputText" value=""></textarea>
+	<button onclick="onClick()">Check</button>
+	<p>Matches are bold and italic</p>
+	<p id="result"></p>
+	
+	<script>
+		var word = document.getElementById("word"),
+			caseSensitive =	document.getElementById("sensitive").checked,
+			inputText = document.getElementById("inputText"),
+			result = document.getElementById("result");
+		
+		function onClick() {
+			result.innerHTML = occurrencesOfWord(inputText.value, word.value, caseSensitive);
+		}
+
+		function occurrencesOfWord(inputText, word, caseSensitive){
+			var flags = caseSensitive?'g':'gi',
+				pattern = '\\b' + word + '\\b',
+				regex = new RegExp(pattern, flags);
+
+			return inputText.replace(regex, function(match){
+				return '<strong><i>' + match + '</i></strong>';
+			});
+		}
+	</script>
+</body>
+</html>

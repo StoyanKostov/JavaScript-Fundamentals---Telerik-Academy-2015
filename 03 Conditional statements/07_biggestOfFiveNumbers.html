@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 7. The biggest of five numbers</title>
+</head>
+<body>
+	<h1>Problem 7. The biggest of five numbers</h1>
+	<ul>
+		<li>Write a script that finds the greatest of given 5 variables.</li>
+		<li>Use nested if statements.</li>
+	</ul>
+    <label>First value: </label><input type="text" name="first" id="first" value="" />
+    <label>Second value: </label><input type="text" name="second" id="second" value="" />
+    <label>Third value: </label><input type="text" name="third" id="third" value="" />
+    <label>Fourth value: </label><input type="text" name="fourth" id="fourth" value="" />
+    <label>Fifth value: </label><input type="text" name="fifth" id="fifth" value="" />
+	<button onclick="getBiggestNumber()">check</button>
+    <label>Result:</label><textarea name="result" id="result" disabled="disabled" value=""></textarea>
+	<script>
+	 	var first = document.getElementById("first"),
+			second = document.getElementById("second"),
+			third = document.getElementById("third"),
+			fourth = document.getElementById("fourth"),
+			fifth = document.getElementById("fifth"),
+			result = document.getElementById("result");
+			
+
+		function getBiggestNumber(){
+			var bestNumber = first.value*1;
+
+			if (bestNumber<second.value*1) {
+				bestNumber = second.value*1;
+			}
+			if (bestNumber<third.value*1) {
+				bestNumber = third.value*1;
+			}
+			if (bestNumber<fourth.value*1) {
+				bestNumber = fourth.value*1;
+			}
+			if (bestNumber<fifth.value*1) {
+				bestNumber = fifth.value*1;
+			}
+			
+			result.value = bestNumber;
+		}
+	</script>
+</body>
+</html>

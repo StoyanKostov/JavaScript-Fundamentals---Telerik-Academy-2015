@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Min/Max of sequence</title>
+</head>
+<body>
+	<h1>Problem 4. Lexicographically smallest</h1>
+	<p>Write a script that finds the lexicographically smallest and largest property in document, window and navigator objects.</p>
+    <label>Smallest Property in document: </label><input id="smallestDocumentProperty" name="smallestDocumentProperty"></input>
+    <label>Biggest Property in document: </label><input id="biggestDocumentProperty" name="biggestDocumentProperty"></input>
+    <label>Smallest Property in window: </label><input id="smallestWindowProperty" name="smallestWindowProperty"></input>
+    <label>Biggest Property in window: </label><input id="biggestWindowProperty" name="biggestWindowProperty"></input>
+    <label>Smallest Property in navigator: </label><input id="smallestNavigatorProperty" name="smallestNavigatorProperty"></input>
+    <label>Biggest Property in navigator: </label><input id="biggestNavigatorProperty" name="biggestNavigatorProperty"></input>
+    <button onclick="triggerCheck()">check</button>
+	<script>
+		var smallestDocumentProperty = document.getElementById("smallestDocumentProperty"),
+			biggestDocumentProperty = document.getElementById("biggestDocumentProperty"),
+			smallestWindowProperty = document.getElementById("smallestWindowProperty"),
+			biggestWindowProperty = document.getElementById("biggestWindowProperty"),
+			smallestNavigatorProperty = document.getElementById("smallestNavigatorProperty"),
+			biggestNavigatorProperty = document.getElementById("biggestNavigatorProperty");
+		
+		function triggerCheck(){
+			findProperties(document, smallestDocumentProperty, biggestDocumentProperty);
+			findProperties(window, smallestWindowProperty, biggestWindowProperty);
+			findProperties(navigator, smallestNavigatorProperty, biggestNavigatorProperty);
+		}
+
+		function findProperties(obj, min, max){
+			var bestMinProperty =  Object.keys(obj)[0],
+				bestMaxProperty =  bestMinProperty;
+			
+			// Има една итерация повече, но пък върти само един цикъл и за двете стойности
+			for (property in obj) {
+				if (bestMinProperty < property) {
+					bestMinProperty = property;
+				};
+				if (bestMaxProperty > property) {
+					bestMaxProperty = property;
+				};
+			};
+
+			// Малко е тъпа тая колизия, но вече е един часа
+			min.value = bestMinProperty;
+			max.value = bestMaxProperty;
+		}
+
+	</script>
+</body>
+</html>

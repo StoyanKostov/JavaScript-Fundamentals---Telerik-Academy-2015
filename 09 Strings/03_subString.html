@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 3. Sub-string in text</title>
+</head>
+<body>
+	<h1>Problem 3. Sub-string in text</h1>
+	<ul>
+		<li>Write a JavaScript function that finds how many times a substring is contained in a given text (perform case insensitive search).</li>
+	</ul>
+	<p>
+		Example:</br>
+		The target sub-string is <mark>in</mark></br>
+		The text is as follows: We are liv<mark>in</mark>g <mark>in</mark> an yellow submar<mark>in</mark>e. We don't have anyth<mark>in</mark>g else. <mark>in</mark>side the </br>submar<mark>in</mark>e is very tight.So we are dr<mark>in</mark>k<mark>in</mark>g all the day. We will move out of it <mark>in</mark> 5 days.</br>
+		The result is: 9</br>
+	</p>
+	<script>
+		var	string1 = "We are living in an yellow submarine. We don't have anything else. inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.",
+			string2 = ")(a+b))";
+
+		function countSubString(subString, string){
+			var	counter = 0,
+				currIndex = string.indexOf(subString);
+
+			while(currIndex > -1){
+				counter += 1;
+				currIndex = string.indexOf(subString, currIndex + 1);
+			}
+
+			return counter;
+		}
+		
+		console.log(countSubString('in', string1));
+	</script>
+</body>
+</html>

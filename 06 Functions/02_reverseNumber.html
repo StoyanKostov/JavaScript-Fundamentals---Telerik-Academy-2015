@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 2. Reverse number</title>
+</head>
+<body>
+	<h1>Problem 2. Reverse number</h1>
+	<ul>
+		<li>Write a function that reverses the digits of given decimal number.</li>
+	</ul>
+	<p>Examples: 256 -> 652, 123.45 -> 123.45</p>
+	<label>Number: </label><input type="text" name="number" id="number" value="" />
+	<button onclick="onClick()">Check</button>
+	<label>Result : </label><input id="result"/>
+	
+	<script>
+		var number = document.getElementById("number"),
+			result = document.getElementById("result");
+		
+		function onClick() {
+			result.value = reverseNumber(number.value);
+		}
+
+		function reverseNumber(number){
+			return number.split("").reverse().join("");
+		}
+	</script>
+</body>
+</html>

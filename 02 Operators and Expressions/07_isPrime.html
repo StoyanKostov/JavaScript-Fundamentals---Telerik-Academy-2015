@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 7. Is prime</title>
+</head>
+<body>
+	<h1>Problem 7. Is prime</h1>
+	<p>Write an expression that checks if given positive integer number n (n ≤ 100) is prime.</p>
+	<label>Number:</label><input type="text" name="number" id="number" value="" />
+	<input type="text" name="result" id="result" disabled="disabled" value="" />
+	<button onclick="isPrime()">check</button>
+	<script>
+		var num = document.getElementById("number"),
+			result = document.getElementById("result");
+
+		function isPrime(){
+			numberValue = parseInt(num.value);
+			if ( numberValue < 0 || numberValue > 100) {
+				alert("Write number between 0 and 100");
+			}
+			else if (numberValue == 0 || numberValue == 1) {
+				result.value = "Neither true or false";
+			}
+			else{
+				for (var i = 2; i < numberValue; i++) {
+					if (numberValue % i === 0) {
+						result.value = false;
+						return;
+					}
+				}
+				result.value = true;
+			}
+		}
+	</script>
+</body>
+</html>

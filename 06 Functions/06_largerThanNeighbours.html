@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 6. Larger than neighbours</title>
+</head>
+<body>
+	<h1>Problem 6. Larger than neighbours</h1>
+	<ul>
+		<li>Write a function that checks if the element at given position in given array of integers is bigger than its two neighbours (when such exist).</li>
+	</ul>
+	<p>Write some numbers with separated by ", ".</p>
+	<p>Examle: "4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3"</p>
+    <label>Array: </label><input type="text" name="array" id="arr" value="" />
+    <label>Number: </label><input type="text" name="index" id="index" value="" />
+	<button id="clickTrigger">Click</button>
+	<p>Number of divs on the page: <span id="result"></span></p>
+		
+	<script>
+		var array = document.getElementById("arr"),
+			index = document.getElementById("index"),
+			result = document.getElementById("result"),
+			clickTrigger = document.getElementById("clickTrigger");
+		
+
+		function onClickHandler() {
+			var indexValue = index.value*1;
+			var arr = array.value.split(",").map(function(item){ // Parse strings to numbers
+				return item * 1;
+			});
+
+			result.innerHTML = largerThanNeighbours(arr, indexValue);
+		}
+		// Event listener
+		clickTrigger.addEventListener("click", onClickHandler, false);
+
+		// main logic
+		function largerThanNeighbours(array, index){
+			//Chek if index has neighbours
+			if ((index > (array.length - 2)) || (index < 1)) {
+				console.log('error')
+				return;
+			}
+
+			if (array[index-1] < array[index] && array[index] > array[index + 1]) {
+				return index;
+			}
+			else{
+				return -1;
+			}
+		}
+	</script>
+</body>
+</html>

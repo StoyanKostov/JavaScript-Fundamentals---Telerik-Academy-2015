@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Has property</title>
+</head>
+<body>
+	<h1>Problem 4. Has property</h1>
+	<ul>
+		<li>Write a function that checks if a given object contains a given property.</li>
+	</ul>
+	<script>
+		function hasProperty(obj, prop){
+			if (!obj || !prop) {
+				throw new Error('object and property must be passed!');
+			}
+		    return obj.hasOwnProperty(prop);
+		}
+
+		var bar = {foo:'1', bar:'2', multi:{foo1: 5, bar5: 6}},
+			hasProp = hasProperty(bar, 'foo');
+		console.log('hasProp foo1', hasProp);
+	</script>
+</body>
+</html>

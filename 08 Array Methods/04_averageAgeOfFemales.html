@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problem 4. Average age of females</title>
+</head>
+<body>
+	<h1>Problem 4. Average age of females</h1>
+	<ul>
+		<li>Write a function that calculates the average age of all females, extracted from an array of persons
+			<ul>
+				<li>Use Array#filter</li>
+				<li>Use only array methods and no regular loops (for, while)</li>
+ 			</ul>
+		</li>
+	</ul>	
+	<script>
+		// Function for creating persons
+		function createPerson(firstname, lastname, age, gender){
+			var Person = {
+				firstname: firstname,
+				lastname: lastname,
+				age: age,
+				gender: gender
+			} 
+			return Person;
+		}
+
+		// Fill array with persons
+		var counter = 0,
+			sex = true,
+			persons = Array.apply(null, new Array(10)).map(function(item){
+				sex = sex?false:true
+				var firstname = 'Jone' + (++counter), 
+					lastname = 'Doe' + (counter),
+					age = 10 + counter, 
+					gender = sex;
+
+				return createPerson(firstname, lastname, age, gender);
+			});
+
+		// function that calculates the average age of all females
+		function calcAverageFemaleAge(arr){
+			var females = arr.filter(function(element, index, array){ // Filter by gender
+							return element.gender == true; 
+					}),
+				allAge = females
+					.map(function(element, index, array) { // get female ages
+	  					return element.age;
+					})
+					.reduce(function(previousValue, currentValue, index, array) { // Calculate ages
+	  					return previousValue + currentValue;
+					});
+
+			return allAge / females.length; // Calculate avarage age
+		}
+
+		// Main logic here
+		console.log(calcAverageFemaleAge(persons));
+	</script>
+</body>
+</html>
